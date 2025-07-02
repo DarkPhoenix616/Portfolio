@@ -38,7 +38,10 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
             OAuth2User oauthUser = (OAuth2User) authentication.getPrincipal();
             String email    = oauthUser.getAttribute("email");
             String fullName = oauthUser.getAttribute("name");
-            String token    = tokenProvider.createToken(email, fullName);
+            Role newRole = Role.ROLE_USER;
+            List<String> list = new ArrayList<>();
+            list.add(newRole.toString());
+            String token  = tokenProvider.createToken(email, fullName, list);
 
             String check = userService.findUsernameByEmail(email);
 
