@@ -164,9 +164,8 @@ const nameInput = form.querySelector('input[name="fullname"]');
 // OAuth flow
 oauthBtn.addEventListener('click', () => {
   window.location.href = 'https://portfolio-backend-app-123.azurewebsites.net/oauth2/authorization/google';
-  //window.location.href = 'http://localhost:8080/oauth2/authorization/google';
 });
-
+//window.location.href = 'http://localhost:8080/oauth2/authorization/google';
 // --- INITIAL STATE: require sign‑in before allowing subject/message ---
 const token = getCookie('DANIES_JWT_TOKEN');
 if (token) {
