@@ -11,11 +11,12 @@ public class EmailService {
     @Autowired
     private JavaMailSender mailSender;
 
-    public void sendContactEmail(String from, String subject, String message) {
+    public void sendContactEmail(String from, String subject, String message, String name) {
         SimpleMailMessage email = new SimpleMailMessage();
         email.setTo("daniegeorgejohn@gmail.com");  // your destination
         email.setSubject("Portfolio Website: " + subject);
-        email.setText("From: " + from + "\n\n" + message);
+        email.setText("From: " + from + "\n\n" + name + "\n\n");
+        email.setFrom("Message: " + message+ "\n\n");
         mailSender.send(email);
     }
 }

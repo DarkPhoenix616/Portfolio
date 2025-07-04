@@ -35,10 +35,11 @@ public class ContactController {
             String email = jwtTokenProvider.getEmailFromToken(jwt);
             System.out.println("Got email: " + email);
 
+            String name = body.get("name");
             String subject = body.get("subject");
             String message = body.get("message");
 
-            emailService.sendContactEmail(email, subject, message);
+            emailService.sendContactEmail(email, subject, message, name);
             return ResponseEntity.ok("Message sent!");
         } catch (Exception e) {
             e.printStackTrace();

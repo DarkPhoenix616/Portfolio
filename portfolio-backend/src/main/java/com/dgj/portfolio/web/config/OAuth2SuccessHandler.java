@@ -57,24 +57,26 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
 
 
 
-            // Set cookie
-            Cookie cookie = new Cookie("DANIES_JWT_TOKEN", token);
-            cookie.setHttpOnly(true);
-            cookie.setSecure(false);
-            cookie.setPath("/");
-            cookie.setMaxAge((int)(tokenProvider.getValidity() / 1000));
-            response.addCookie(cookie);
+            // after generating `token`…
 
-            // Write JSON
-            Map<String,Object> payload = Map.of(
-                    "token", token,
-                    "email", email,
-                    "name",  fullName
+// 1) Build a proper Set-Cookie header for your backend’s origin
+            String header = String.format(
+                    "DANIES_JWT_TOKEN=%s; Path=/; Max-Age=%d; Secure; SameSite=None",
+                    token,
+                    tokenProvider.getValidity() / 1000
             );
-            response.setStatus(HttpServletResponse.SC_OK);
-            response.setContentType("application/json");
-            objectMapper.writeValue(response.getWriter(), payload);
-            response.getWriter().flush();
+
+// 2) Add the header (no `Domain=…` so it defaults to whatever host served this response)
+            response.setHeader("Set-Cookie", header);
+
+// 3) Redirect to your frontend
+            response.sendRedirect("https://portfoliofrontend-sand.vercel.app/");
+            //response.sendRedirect("http://localhost:63342/Portfolio%20Website/portfolio-frontend/vcard-personal-portfolio/index.html?_ijt=fqoibml88qv2c007cq2kk9h9b8");
+
+
+
+
+
 
         } catch (Exception ex) {
             // log the error so you can see it in your server console
@@ -90,4 +92,4 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
 
 }
 //        // 3) redirect to your frontend (or write a JSON response)
-//        response.sendRedirect("https://your-frontend-app.com/");
+//        response.sendRedirect("https://portfoliofrontend-iivecm3q7-darkphoenix616s-projects.vercel.app/");
