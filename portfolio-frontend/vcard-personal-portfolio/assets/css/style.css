@@ -1164,7 +1164,7 @@ margin-top: 30px; }
 }
 
 .form-input {
-  color: var(--lavender);
+  color: var(--orange-yellow-crayola);
   font-size: var(--fs-6);
   font-weight: var(--fw-400);
   padding: 13px 20px;
@@ -1915,4 +1915,8 @@ textarea.form-input::-webkit-resizer { display: none; }
 
 .project_description{
   color:orange; !important;
+}
+
+.google-map {
+  color: var(--lavender);
 }
