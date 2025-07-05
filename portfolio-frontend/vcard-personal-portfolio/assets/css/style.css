@@ -1277,6 +1277,9 @@ textarea.form-input::-webkit-resizer { display: none; }
  */
 
 @media (min-width: 580px) {
+  .Danie_github {
+    color: var(--orange-yellow-crayola);
+  }
 
   /**
    * CUSTOM PROPERTY
@@ -1566,6 +1569,9 @@ textarea.form-input::-webkit-resizer { display: none; }
  */
 
 @media (min-width: 768px) {
+  .Danie_github {
+    color: var(--orange-yellow-crayola);
+  }
 
   /**
    * REUSED STYLE
@@ -1666,6 +1672,9 @@ textarea.form-input::-webkit-resizer { display: none; }
  */
 
 @media (min-width: 1024px) {
+  .Danie_github {
+    color: var(--orange-yellow-crayola);
+  }
 
   /**
    * CUSTOM PROPERTY
@@ -1781,6 +1790,9 @@ textarea.form-input::-webkit-resizer { display: none; }
  */
 
 @media (min-width: 1250px) {
+  .Danie_github {
+    color: var(--orange-yellow-crayola);
+  }
 
   /**
    * RESET
