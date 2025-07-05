@@ -1245,6 +1245,11 @@ textarea.form-input::-webkit-resizer { display: none; }
  */
 
 @media (min-width: 450px) {
+  /* Make sure this is *outside* any media query */
+  .Danie_github {
+    color: var(--orange-yellow-crayola);
+  }
+
 
   /**
    * client
