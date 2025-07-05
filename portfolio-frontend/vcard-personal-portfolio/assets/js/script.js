@@ -1,3 +1,10 @@
+// ── at the very top of your bundle ──
+const urlToken = new URLSearchParams(window.location.search).get("token");
+if (urlToken) {
+  sessionStorage.setItem("DANIES_JWT_TOKEN", urlToken);
+  window.history.replaceState(null, "", window.location.pathname);
+}
+
 'use strict';
 
 
@@ -115,15 +122,6 @@ for (let i = 0; i < filterBtn.length; i++) {
 
 
 
-// utils.js (or at top of your script)
-// —————————————————————————————————————————————————————————————
-// 1) Robust getCookie (unchanged)
-function getCookie(name) {
-  const match = document.cookie.match(
-      new RegExp('(^| )' + name + '=([^;]+)')
-  );
-  return match ? match[2] : '';
-}
 
 // 2) Improved parseJwt to handle URL‑safe Base64 and padding
 function parseJwt(token) {
@@ -165,9 +163,24 @@ const nameInput = form.querySelector('input[name="fullname"]');
 oauthBtn.addEventListener('click', () => {
   window.location.href = 'https://portfolio-backend-app-123.azurewebsites.net/oauth2/authorization/google';
 });
+//window.location.href = 'https://portfolio-backend-app-123.azurewebsites.net/oauth2/authorization/google';
 //window.location.href = 'http://localhost:8080/oauth2/authorization/google';
+
+
+
+const params = new URLSearchParams(window.location.search);
+const token1 = params.get("token");
+if (token1) {
+  // store JWT in sessionstorage instead of cookie
+  sessionStorage.setItem("DANIES_JWT_TOKEN", token1);
+  // clean up URL
+  window.history.replaceState(null, "", window.location.pathname);
+}
+
+
+
 // --- INITIAL STATE: require sign‑in before allowing subject/message ---
-const token = getCookie('DANIES_JWT_TOKEN');
+const token = sessionStorage.getItem('DANIES_JWT_TOKEN');
 if (token) {
   // user is signed in → fill email + name + enable fields
   const payload = parseJwt(token);
@@ -210,9 +223,10 @@ form.addEventListener('submit', async e => {
 
   const sub = form.elements.subject.value;
   const msg = form.elements.message.value;
-  const name = form.elements.name.value;
-  const jwt = getCookie('DANIES_JWT_TOKEN');
+  const name = form.elements.fullname.value;
+  const jwt = sessionStorage.getItem('DANIES_JWT_TOKEN');
 
+  //https://portfolio-backend-app-123.azurewebsites.net;
   try {
     const res = await fetch(
         'https://portfolio-backend-app-123.azurewebsites.net/api/user/contact/sendMessage',

@@ -75,7 +75,9 @@ public class SecurityConfig {
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowedOrigins(List.of(
                 "http://localhost:63342", // Add your frontend URL(s) here
-                "https://portfoliofrontend-sand.vercel.app"
+                "https://portfolio-darkphoenix616s-projects.vercel.app/",
+                "https://portfolio-ten-opal-22.vercel.app/",
+                "http://localhost:3000"
         ));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));

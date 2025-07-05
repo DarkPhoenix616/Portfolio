@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 //import javax.servlet.http.*;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.*;
 
 @Component
@@ -60,18 +61,15 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
             // after generating `token`…
 
 // 1) Build a proper Set-Cookie header for your backend’s origin
+            // after token creation...
             String header = String.format(
                     "DANIES_JWT_TOKEN=%s; Path=/; Max-Age=%d; Secure; SameSite=None",
                     token,
                     tokenProvider.getValidity() / 1000
             );
-
-// 2) Add the header (no `Domain=…` so it defaults to whatever host served this response)
             response.setHeader("Set-Cookie", header);
-
-// 3) Redirect to your frontend
-            response.sendRedirect("https://portfoliofrontend-sand.vercel.app/");
-            //response.sendRedirect("http://localhost:63342/Portfolio%20Website/portfolio-frontend/vcard-personal-portfolio/index.html?_ijt=fqoibml88qv2c007cq2kk9h9b8");
+            response.setStatus(HttpServletResponse.SC_FOUND);
+            response.setHeader("Location", "https://portfolio-ten-opal-22.vercel.app?token=" + token);
 
 
 

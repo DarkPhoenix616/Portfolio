@@ -15,8 +15,12 @@ public class EmailService {
         SimpleMailMessage email = new SimpleMailMessage();
         email.setTo("daniegeorgejohn@gmail.com");  // your destination
         email.setSubject("Portfolio Website: " + subject);
-        email.setText("From: " + from + "\n\n" + name + "\n\n");
-        email.setFrom("Message: " + message+ "\n\n");
+
+        email.setText("From: " + from + "\n" +
+                "Name: " + name + "\n\n" +
+                "Message:\n" + message);
+
+        email.setFrom(from); // <-- 'from' must be a valid email like "daniemahan@gmail.com"
         mailSender.send(email);
     }
 }
