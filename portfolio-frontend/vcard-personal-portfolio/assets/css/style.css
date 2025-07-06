@@ -1932,3 +1932,10 @@ textarea.form-input::-webkit-resizer { display: none; }
 .google-map {
   color: var(--lavender);
 }
+
+.skills-list .title-wrapper p,
+.Danie_github {
+  color: var(--orange-yellow-crayola) !important;
+}
+
+
