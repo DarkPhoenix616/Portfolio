@@ -331,7 +331,7 @@ main {
   transition: var(--transition-2);
 }
 
-.sidebar.active { max-height: 405px; }
+.sidebar.active { max-height: 405px;overflow-y: auto;  }
 
 .sidebar-info {
   position: relative;
@@ -1577,7 +1577,7 @@ textarea.form-input::-webkit-resizer { display: none; }
    * REUSED STYLE
    */
 
-  .sidebar, article { width: 700px; }
+  .sidebar, article { width: 800px; }
 
   .has-scrollbar::-webkit-scrollbar-button { width: 100px; }
 
