@@ -161,7 +161,7 @@ const nameInput = form.querySelector('input[name="fullname"]');
 
 // OAuth flow
 oauthBtn.addEventListener('click', () => {
-  window.location.href = 'https://portfolio-backend-app-123.azurewebsites.net/oauth2/authorization/google';
+  window.location.href = 'https://danie-portfolio-api-261010.azurewebsites.net/oauth2/authorization/google';
 });
 //window.location.href = 'https://portfolio-backend-app-123.azurewebsites.net/oauth2/authorization/google';
 //window.location.href = 'http://localhost:8080/oauth2/authorization/google';
@@ -229,7 +229,7 @@ form.addEventListener('submit', async e => {
   //https://portfolio-backend-app-123.azurewebsites.net;
   try {
     const res = await fetch(
-        'https://portfolio-backend-app-123.azurewebsites.net/api/user/contact/sendMessage',
+        'https://danie-portfolio-api-261010.azurewebsites.net/api/user/contact/sendMessage',
         {
           method: 'POST',
           credentials: 'include',
