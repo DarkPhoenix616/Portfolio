@@ -158,12 +158,12 @@ const subjectIn  = form.querySelector('input[name="subject"]');
 const messageTa  = form.querySelector('textarea[name="message"]');
 // Add this with your other DOM refs
 const nameInput = form.querySelector('input[name="fullname"]');
+const backendBaseUrl = 'https://danie-portfolio-api-261010.azurewebsites.net';
 
 // OAuth flow
 oauthBtn.addEventListener('click', () => {
-  window.location.href = 'https://danie-portfolio-api-261010.azurewebsites.net/oauth2/authorization/google';
+  window.location.href = `${backendBaseUrl}/oauth2/authorization/google`;
 });
-//window.location.href = 'https://portfolio-backend-app-123.azurewebsites.net/oauth2/authorization/google';
 //window.location.href = 'http://localhost:8080/oauth2/authorization/google';
 
 
@@ -226,10 +226,9 @@ form.addEventListener('submit', async e => {
   const name = form.elements.fullname.value;
   const jwt = sessionStorage.getItem('DANIES_JWT_TOKEN');
 
-  //https://portfolio-backend-app-123.azurewebsites.net;
   try {
     const res = await fetch(
-        'https://danie-portfolio-api-261010.azurewebsites.net/api/user/contact/sendMessage',
+        `${backendBaseUrl}/api/user/contact/sendMessage`,
         {
           method: 'POST',
           credentials: 'include',
@@ -252,7 +251,7 @@ form.addEventListener('submit', async e => {
       // Keep fields enabled and form ready for next message
       formBtn.disabled = !form.checkValidity();
     } else {
-      throw new Error(await res.text());
+      throw new Error(`HTTP ${res.status}: ${await res.text()}`);
     }
   } catch (err) {
     statusText.style.color = 'crimson';
@@ -260,8 +259,8 @@ form.addEventListener('submit', async e => {
     formBtn.disabled = false;
 
     // Special case: If 401 (Unauthorized), force re-login
-    if (err.message.includes('401')) {
-      document.cookie = "DANIES_JWT_TOKEN=; max-age=0";
+    if (err.message.includes('HTTP 401')) {
+      sessionStorage.removeItem('DANIES_JWT_TOKEN');
       subjectIn.disabled = true;
       messageTa.disabled = true;
       oauthBtn.style.display = 'block';
@@ -325,7 +324,4 @@ window.addEventListener('beforeunload', () => {
   sessionStorage.setItem('scrollPos', window.scrollY);
   console.log('Saving scrollPos=', window.scrollY);
 });
-
-
-
 
