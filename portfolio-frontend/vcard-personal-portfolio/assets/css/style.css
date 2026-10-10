@@ -760,16 +760,11 @@ margin-top: 30px; }
 }
 
 .clients-item img {
-  width: 30%;
-  filter: grayscale(1);
-  transition: var(--transition-1);
+  display: block;
+  width: 100%;
+  height: 90px;
+  object-fit: contain;
 }
-
-.clients-item img:hover { filter: grayscale(0); }
-
-
-
-
 
 /*-----------------------------------*\
   #RESUME
@@ -1781,10 +1776,6 @@ textarea.form-input::-webkit-resizer { display: none; }
 
 }
 
-
-
-
-
 /**
  * responsive larger than 1250px screen
  */
@@ -1938,4 +1929,15 @@ textarea.form-input::-webkit-resizer { display: none; }
   color: var(--orange-yellow-crayola) !important;
 }
 
+/* Keep company logos aligned and displayed in their original colors. */
+.clients-list {
+  justify-content: center;
+  align-items: center;
+  overflow-x: visible;
+}
 
+.clients-item {
+  flex: 0 0 180px;
+  width: 180px;
+  min-width: 0;
+}
